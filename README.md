@@ -94,3 +94,18 @@ RaawwWWWWWRRRR!!
 [bargee@barge ~]$ ./hello-world.simg
 RaawwWWWWWRRRR!!
 ```
+
+## Build an image with Singularity recipe file
+
+```
+[bargee@barge ~]$ sudo singularity build sl.simg /vagrant/recipes/sl.Singularity
+[bargee@barge ~]$ ./sl.simg
+[bargee@barge ~]$ singularity run sl.simg
+[bargee@barge ~]$ singularity exec sl.simg sl
+[bargee@barge ~]$ singularity shell sl.simg
+Singularity: Invoking an interactive shell within container...
+
+Singularity sl.simg:~> sl
+Singularity sl.simg:~> exit
+exit
+```

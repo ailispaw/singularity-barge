@@ -14,8 +14,11 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ailispaw/barge"
   config.vm.box_version = ">= 2.7.3"
 
+  config.vm.synced_folder ".", "/vagrant"
+
   config.vm.provision :shell do |sh|
     sh.inline = <<-EOT
+      pkg install file
       pkg install singularity
     EOT
   end
