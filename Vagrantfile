@@ -12,15 +12,12 @@ Vagrant.configure(2) do |config|
   config.vm.define "singularity-barge"
 
   config.vm.box = "ailispaw/barge"
-  config.vm.box_version = ">= 2.7.4"
+  config.vm.box_version = ">= 2.8.0"
 
   config.vm.synced_folder ".", "/vagrant"
 
   config.vm.provision :shell do |sh|
     sh.inline = <<-EOT
-      pkg install libcurl -e BR2_PACKAGE_OPENSSL=y -e BR2_PACKAGE_CURL=y
-      pkg install coreutils
-      pkg install file
       pkg install singularity
     EOT
   end
