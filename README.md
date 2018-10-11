@@ -1,8 +1,8 @@
 # Singularity on Barge with Vagrant
 
-[Singularity](http://singularity.lbl.gov/) is a container platform focused on supporting "Mobility of Compute."
+[Singularity](https://github.com/sylabs/singularity) is an open source container platform designed to be simple, fast, and secure.
 
-> Singularity enables users to have full control of their environment. Singularity containers can be used to package entire scientific workflows, software and libraries, and even data.
+> Singularity is optimized for EPC and HPC workloads, allowing untrusted users to run untrusted containers in a trusted way.
 
 This repo creates an environment to use Singularity on [Barge](https://atlas.hashicorp.com/ailispaw/boxes/barge) with [Vagrant](https://www.vagrantup.com/) instantly.
 
@@ -23,89 +23,95 @@ Now you can use `singularity` on the Barge VM.
 
 ```
 $ vagrant ssh
-Welcome to Barge 2.7.3, Docker version 1.10.3, build 20f81dd
+Welcome to Barge 2.10.1, Docker version 1.10.3, build 20f81dd
 [bargee@barge ~]$ singularity
-USAGE: singularity [global options...] <command> [command options...] ...
 
-GLOBAL OPTIONS:
-    -d|--debug    Print debugging information
-    -h|--help     Display usage summary
-    -s|--silent   Only print errors
-    -q|--quiet    Suppress all normal output
-       --version  Show application version
-    -v|--verbose  Increase verbosity +1
-    -x|--sh-debug Print shell wrapper debugging information
+Linux container platform optimized for High Performance Computing (HPC) and
+Enterprise Performance Computing (EPC)
 
-GENERAL COMMANDS:
-    help       Show additional help for a command or container
-    selftest   Run some self tests for singularity install
+Usage:
+  singularity [global options...]
 
-CONTAINER USAGE COMMANDS:
-    exec       Execute a command within container
-    run        Launch a runscript within container
-    shell      Run a Bourne shell within container
-    test       Launch a testscript within container
+Description:
+  Singularity containers provide an application virtualization layer enabling
+  mobility of compute via both application and environment portability. With
+  Singularity one is capable of building a root file system that runs on any
+  other Linux system where Singularity is installed.
 
-CONTAINER MANAGEMENT COMMANDS:
-    apps       List available apps within a container
-    bootstrap  *Deprecated* use build instead
-    build      Build a new Singularity container
-    check      Perform container lint checks
-    inspect    Display container's metadata
-    mount      Mount a Singularity container image
-    pull       Pull a Singularity/Docker container to $PWD
+Options:
+  -d, --debug              print debugging information (highest verbosity)
+  -h, --help               help for singularity
+  -q, --quiet              suppress normal output
+  -s, --silent             only print errors
+  -t, --tokenfile string   path to the file holding your sylabs
+                           authentication token (default
+                           "/home/bargee/.singularity/sylabs-token")
+  -v, --verbose            print additional information
+      --version            version for singularity
 
-COMMAND GROUPS:
-    image      Container image command group
-    instance   Persistent instance command group
+Available Commands:
+  build       Build a new Singularity container
+  capability  Manage Linux capabilities on containers
+  exec        Execute a command within container
+  help        Help about any command
+  inspect     Display metadata for container if available
+  instance    Manage containers running in the background
+  keys        Manage OpenPGP key stores
+  pull        Pull a container from a URI
+  push        Push a container to a Library URI
+  run         Launch a runscript within container
+  run-help    Display help for container if available
+  search      Search the library
+  shell       Run a Bourne shell within container
+  sign        Attach cryptographic signatures to container
+  test        Run defined tests for this particular container
+  verify      Verify cryptographic signatures on container
+  version     Show application version
+
+Examples:
+  $ singularity help <command>
+      Additional help for any Singularity subcommand can be seen by appending
+      the subcommand name to the above command.
 
 
-CONTAINER USAGE OPTIONS:
-    see singularity help <command>
-
-For any additional help or support visit the Singularity
-website: http://singularity.lbl.gov/
-
+For additional help or support, please visit https://www.sylabs.io/docs/
 [bargee@barge ~]$ 
 ```
 
 
 ## Interact with Images
 
-http://singularity.lbl.gov/quickstart#interact-with-images
+http://singularity.lbl.gov/quickstart#interact-with-images  
+https://www.sylabs.io/guides/3.0/user-guide/quick_start.html#interact-with-images  
 
 ```
-[bargee@barge ~]$ singularity pull --name hello-world.simg shub://vsoch/hello-world
-Progress |===================================| 100.0%
-Done. Container is at: /mnt/data/home/bargee/hello-world.simg
-[bargee@barge ~]$ singularity shell hello-world.simg
-Singularity: Invoking an interactive shell within container...
-
-Singularity hello-world.simg:~> ls /
-bin   dev    etc   lib  media  opt   rawr.sh  run   singularity  sys  usr
-boot  environment  home  lib64  mnt    proc  root     sbin  srv    tmp  var
-Singularity hello-world.simg:~> exit
+[bargee@barge ~]$ singularity pull shub://vsoch/hello-world
+WARNING: Authentication token file not found : Only pulls of public images will succeed
+ 62.32 MiB / 62.32 MiB [========================================================================================] 100.00% 8.52 MiB/s 7s
+[bargee@barge ~]$ singularity shell hello-world_latest.sif
+Singularity hello-world_latest.sif:~> ls /
+bin   dev      etc   lib    media  opt   rawr.sh  run   singularity  sys  usr
+boot  environment  home  lib64  mnt    proc  root     sbin  srv      tmp  var
+Singularity hello-world_latest.sif:~> exit
 exit
-[bargee@barge ~]$ singularity exec hello-world.simg ls /
-bin   dev    etc   lib  media  opt   rawr.sh  run   singularity  sys  usr
-boot  environment  home  lib64  mnt    proc  root     sbin  srv    tmp  var
-[bargee@barge ~]$ singularity run hello-world.simg
+[bargee@barge ~]$ singularity exec hello-world_latest.sif ls /
+bin   dev      etc   lib    media  opt   rawr.sh  run   singularity  sys  usr
+boot  environment  home  lib64  mnt    proc  root     sbin  srv      tmp  var
+[bargee@barge ~]$ singularity run hello-world_latest.sif
 RaawwWWWWWRRRR!!
-[bargee@barge ~]$ ./hello-world.simg
+[bargee@barge ~]$ ./hello-world_latest.sif
 RaawwWWWWWRRRR!!
 ```
 
 ## Build an image with Singularity recipe file
 
 ```
-[bargee@barge ~]$ sudo singularity build sl.simg /vagrant/recipes/sl.Singularity
-[bargee@barge ~]$ ./sl.simg
-[bargee@barge ~]$ singularity run sl.simg
-[bargee@barge ~]$ singularity exec sl.simg sl
-[bargee@barge ~]$ singularity shell sl.simg
-Singularity: Invoking an interactive shell within container...
-
-Singularity sl.simg:~> sl
-Singularity sl.simg:~> exit
+[bargee@barge ~]$ sudo singularity build sl.sif /vagrant/recipes/sl.Singularity
+[bargee@barge ~]$ ./sl.sif
+[bargee@barge ~]$ singularity run sl.sif
+[bargee@barge ~]$ singularity exec sl.sif sl
+[bargee@barge ~]$ singularity shell sl.sif
+Singularity sl.sif:~> sl
+Singularity sl.sif:~> exit
 exit
 ```
