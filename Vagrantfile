@@ -33,7 +33,7 @@ Vagrant.configure(2) do |config|
 
       git config --global http.sslCAinfo /etc/ssl/certs/ca-certificates.crt
 
-      docker build --tag ailispaw/singularity /vagrant/singularity
+      docker build --tag ailispaw/singularity:builder /vagrant/singularity
 
       rm -rf ${HOME}/go/src/github.com/sylabs
       mkdir -p ${HOME}/go/src/github.com/sylabs
@@ -42,7 +42,7 @@ Vagrant.configure(2) do |config|
       cd singularity
       git checkout #{SINGULARITY_VERSION}
 
-      docker run --rm -v $(pwd):$(pwd) ailispaw/singularity
+      docker run --rm -v $(pwd):$(pwd) ailispaw/singularity:builder
     EOT
   end
 
