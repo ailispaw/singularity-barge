@@ -20,9 +20,9 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision :shell, run: "always" do |sh|
     sh.inline = <<-EOT
-      sudo pkg install git
-      sudo pkg install make
-      sudo pkg install squashfs
+      pkg install git
+      pkg install make
+      pkg install squashfs
     EOT
   end
 
@@ -43,14 +43,24 @@ Vagrant.configure(2) do |config|
       git checkout #{SINGULARITY_VERSION}
 
       docker run --rm -v $(pwd):$(pwd) ailispaw/singularity:builder
+
+      # Build a Barge Package for singularity
+      source /etc/os-release
+      PKG_DIR=/opt/pkg/${VERSION}
+      sudo mkdir -p ${PKG_DIR}
+      TMP_DIR=/tmp/singularity
+      mkdir -p ${TMP_DIR}
+
+      cd ${HOME}/go/src/github.com/sylabs/singularity
+      sudo make PREFIX=${TMP_DIR}/usr -C builddir install
+      sudo busybox tar -zc -f ${PKG_DIR}/barge-pkg-singularity-${VERSION}.tar.gz -C ${TMP_DIR} .
     EOT
   end
 
   config.vm.provision :shell, run: "always" do |sh|
-    sh.privileged = false
     sh.inline = <<-EOT
-      cd ${HOME}/go/src/github.com/sylabs/singularity
-      sudo make -C builddir install
+      pkg install singularity
+      ln -s /usr/etc/bash_completion.d/singularity /etc/bash_completion.d/singularity
     EOT
   end
 end
