@@ -8,7 +8,7 @@ module VagrantPlugins
   end
 end
 
-SINGULARITY_VERSION = "v3.0.0"
+SINGULARITY_VERSION = "v3.0.1"
 
 Vagrant.configure(2) do |config|
   config.vm.define "singularity-barge"
@@ -52,15 +52,15 @@ Vagrant.configure(2) do |config|
       mkdir -p ${TMP_DIR}
 
       cd ${HOME}/go/src/github.com/sylabs/singularity
-      sudo make PREFIX=${TMP_DIR}/usr -C builddir install
+      sudo make DESTDIR=${TMP_DIR} -C builddir install
       sudo busybox tar -zc -f ${PKG_DIR}/barge-pkg-singularity-${VERSION}.tar.gz -C ${TMP_DIR} .
+      sudo rm -rf ${TMP_DIR}
     EOT
   end
 
   config.vm.provision :shell, run: "always" do |sh|
     sh.inline = <<-EOT
       pkg install singularity
-      ln -s /usr/etc/bash_completion.d/singularity /etc/bash_completion.d/singularity
     EOT
   end
 end
