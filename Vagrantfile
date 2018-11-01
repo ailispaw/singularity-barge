@@ -20,7 +20,6 @@ Vagrant.configure(2) do |config|
     sh.inline = <<-EOT
       pkg install squashfs
       pkg install singularity
-      ln -s /usr/etc/bash_completion.d/singularity /etc/bash_completion.d/singularity
     EOT
   end
 end
