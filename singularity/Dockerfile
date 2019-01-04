@@ -12,7 +12,7 @@ RUN apt-get -q update \
 
 USER bargee
 
-ENV GOVERSION=1.11.1 \
+ENV GOVERSION=1.11.4 \
     GOROOT=/home/bargee/.go \
     GOPATH=/home/bargee/go
 
