@@ -24,7 +24,7 @@ Now you can use `singularity` on the Barge VM.
 ```
 $ vagrant ssh
 Welcome to Barge 2.10.1, Docker version 1.10.3, build 20f81dd
-[bargee@barge ~]$ singularity
+[bargee@barge ~]$ singularity -h
 
 Linux container platform optimized for High Performance Computing (HPC) and
 Enterprise Performance Computing (EPC)
