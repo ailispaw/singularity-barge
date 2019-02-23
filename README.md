@@ -50,13 +50,16 @@ Options:
       --version            version for singularity
 
 Available Commands:
+  apps        apps <image path>
   build       Build a new Singularity container
+  cache       Manage your local singularity cache
   capability  Manage Linux capabilities on containers
   exec        Execute a command within container
   help        Help about any command
   inspect     Display metadata for container if available
   instance    Manage containers running in the background
-  keys        Manage OpenPGP key stores
+  key         Manage OpenPGP key stores
+  oci         Manage OCI containers
   pull        Pull a container from a URI
   push        Push a container to a Library URI
   run         Launch a runscript within container
