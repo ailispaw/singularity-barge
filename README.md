@@ -50,26 +50,26 @@ Options:
       --version            version for singularity
 
 Available Commands:
-  apps        apps <image path>
-  build       Build a new Singularity container
-  cache       Manage your local singularity cache
-  capability  Manage Linux capabilities on containers
-  exec        Execute a command within container
+  apps        List available apps within a container
+  build       Build a Singularity image
+  cache       Manage the local cache
+  capability  Manage Linux capabilities for users and groups
+  exec        Run a command within a container
   help        Help about any command
-  inspect     Display metadata for container if available
-  instance    Manage containers running in the background
-  key         Manage OpenPGP key stores
+  inspect     Show metadata for an image
+  instance    Manage containers running as services
+  key         Manage OpenPGP keys
   oci         Manage OCI containers
-  pull        Pull a container from a URI
+  pull        Pull an image from a URI
   push        Push a container to a Library URI
-  run         Launch a runscript within container
-  run-help    Display help for container if available
-  search      Search the library
-  shell       Run a Bourne shell within container
-  sign        Attach cryptographic signatures to container
-  test        Run defined tests for this particular container
-  verify      Verify cryptographic signatures on container
-  version     Show application version
+  run         Run the user-defined default command within a container
+  run-help    Show the user-defined help for an image
+  search      Search a Library for images
+  shell       Run a shell within a container
+  sign        Attach a cryptographic signature to an image
+  test        Run the user-defined tests within a container
+  verify      Verify cryptographic signatures attached to an image
+  version     Show the version for Singularity
 
 Examples:
   $ singularity help <command>
@@ -93,13 +93,13 @@ WARNING: Authentication token file not found : Only pulls of public images will 
  62.32 MiB / 62.32 MiB [========================================================================================] 100.00% 8.52 MiB/s 7s
 [bargee@barge ~]$ singularity shell hello-world_latest.sif
 Singularity hello-world_latest.sif:~> ls /
-bin   dev      etc   lib    media  opt   rawr.sh  run   singularity  sys  usr
-boot  environment  home  lib64  mnt    proc  root     sbin  srv      tmp  var
+bin   dev	   etc	 lib	media  opt   rawr.sh  run   singularity  sys  usr
+boot  environment  home  lib64	mnt    proc  root     sbin  srv		 tmp  var
 Singularity hello-world_latest.sif:~> exit
 exit
 [bargee@barge ~]$ singularity exec hello-world_latest.sif ls /
-bin   dev      etc   lib    media  opt   rawr.sh  run   singularity  sys  usr
-boot  environment  home  lib64  mnt    proc  root     sbin  srv      tmp  var
+bin   dev	   etc	 lib	media  opt   rawr.sh  run   singularity  sys  usr
+boot  environment  home  lib64	mnt    proc  root     sbin  srv		 tmp  var
 [bargee@barge ~]$ singularity run hello-world_latest.sif
 RaawwWWWWWRRRR!!
 [bargee@barge ~]$ ./hello-world_latest.sif
