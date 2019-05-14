@@ -23,7 +23,7 @@ Now you can use `singularity` on the Barge VM.
 
 ```
 $ vagrant ssh
-Welcome to Barge 2.10.1, Docker version 1.10.3, build 20f81dd
+Welcome to Barge 2.12.2, Docker version 1.10.3, build 20f81dd
 [bargee@barge ~]$ singularity -h
 
 Linux container platform optimized for High Performance Computing (HPC) and
@@ -39,15 +39,13 @@ Description:
   other Linux system where Singularity is installed.
 
 Options:
-  -d, --debug              print debugging information (highest verbosity)
-  -h, --help               help for singularity
-  -q, --quiet              suppress normal output
-  -s, --silent             only print errors
-  -t, --tokenfile string   path to the file holding your sylabs
-                           authentication token (default
-                           "/home/bargee/.singularity/sylabs-token")
-  -v, --verbose            print additional information
-      --version            version for singularity
+  -d, --debug     print debugging information (highest verbosity)
+  -h, --help      help for singularity
+      --nocolor   print without color output (default False)
+  -q, --quiet     suppress normal output
+  -s, --silent    only print errors
+  -v, --verbose   print additional information
+      --version   version for singularity
 
 Available Commands:
   apps        List available apps within a container
@@ -60,8 +58,10 @@ Available Commands:
   instance    Manage containers running as services
   key         Manage OpenPGP keys
   oci         Manage OCI containers
+  plugin      Manage singularity plugins
   pull        Pull an image from a URI
-  push        Push a container to a Library URI
+  push        Upload image to the provided library (default is "cloud.sylabs.io")
+  remote      Manage singularity remote endpoints
   run         Run the user-defined default command within a container
   run-help    Show the user-defined help for an image
   search      Search a Library for images
@@ -72,9 +72,9 @@ Available Commands:
   version     Show the version for Singularity
 
 Examples:
-  $ singularity help <command>
-      Additional help for any Singularity subcommand can be seen by appending
-      the subcommand name to the above command.
+  $ singularity help <command> [<subcommand>]
+  $ singularity help build
+  $ singularity help instance start
 
 
 For additional help or support, please visit https://www.sylabs.io/docs/
@@ -85,7 +85,7 @@ For additional help or support, please visit https://www.sylabs.io/docs/
 ## Interact with Images
 
 http://singularity.lbl.gov/quickstart#interact-with-images  
-https://www.sylabs.io/guides/3.0/user-guide/quick_start.html#interact-with-images  
+https://www.sylabs.io/guides/3.2/user-guide/quick_start.html#interact-with-images  
 
 ```
 [bargee@barge ~]$ singularity pull shub://vsoch/hello-world
