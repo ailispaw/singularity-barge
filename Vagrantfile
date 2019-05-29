@@ -8,7 +8,7 @@ module VagrantPlugins
   end
 end
 
-SINGULARITY_VERSION = "v3.2.0"
+SINGULARITY_VERSION = "v3.2.1"
 
 Vagrant.configure(2) do |config|
   config.vm.define "singularity-barge"
