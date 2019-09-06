@@ -5,7 +5,7 @@ ENV TERM=xterm \
 
 RUN apt-get -q update \
  && apt-get -q -y install --no-install-recommends ca-certificates adduser curl git \
-      build-essential libssl-dev uuid-dev libgpgme11-dev libseccomp-dev pkg-config \
+      build-essential libssl-dev uuid-dev libseccomp-dev pkg-config cryptsetup \
  && apt-get clean && rm -rf /var/lib/apt/lists/* \
  && addgroup --gid ${GID} bargees \
  && adduser --home /home/bargee --shell /bin/bash --gecos '' --ingroup bargees --uid ${UID} --disabled-password bargee
