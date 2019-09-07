@@ -84,26 +84,49 @@ For additional help or support, please visit https://www.sylabs.io/docs/
 
 ## Interact with Images
 
-http://singularity.lbl.gov/quickstart#interact-with-images  
 https://sylabs.io/guides/3.3/user-guide/quick_start.html#interact-with-images
 
 ```
-[bargee@barge ~]$ singularity pull shub://vsoch/hello-world
-WARNING: Authentication token file not found : Only pulls of public images will succeed
- 62.32 MiB / 62.32 MiB [========================================================================================] 100.00% 8.52 MiB/s 7s
-[bargee@barge ~]$ singularity shell hello-world_latest.sif
-Singularity hello-world_latest.sif:~> ls /
-bin   dev	   etc	 lib	media  opt   rawr.sh  run   singularity  sys  usr
-boot  environment  home  lib64	mnt    proc  root     sbin  srv		 tmp  var
-Singularity hello-world_latest.sif:~> exit
+[bargee@barge ~]$ singularity pull library://sylabsed/examples/lolcow
+INFO:    Downloading library image
+ 79.91 MiB / 79.91 MiB [=======================================================================================] 100.00% 13.96 MiB/s 5s
+WARNING: unable to verify container: lolcow_latest.sif
+WARNING: Skipping container verification
+[bargee@barge ~]$ singularity shell lolcow_latest.sif
+Singularity lolcow_latest.sif:~> whoami
+bargee
+Singularity lolcow_latest.sif:~> id
+uid=1000(bargee) gid=1000(bargees) groups=1000(bargees),1001(docker)
+Singularity lolcow_latest.sif:~> exit
 exit
-[bargee@barge ~]$ singularity exec hello-world_latest.sif ls /
-bin   dev	   etc	 lib	media  opt   rawr.sh  run   singularity  sys  usr
-boot  environment  home  lib64	mnt    proc  root     sbin  srv		 tmp  var
-[bargee@barge ~]$ singularity run hello-world_latest.sif
-RaawwWWWWWRRRR!! Avocado!
-[bargee@barge ~]$ ./hello-world_latest.sif
-RaawwWWWWWRRRR!! Avocado!
+[bargee@barge ~]$ singularity exec lolcow_latest.sif cowsay moo
+ _____
+< moo >
+ -----
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+[bargee@barge ~]$ singularity run lolcow_latest.sif
+ ________________________________________
+< Your love life will be... interesting. >
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+[bargee@barge ~]$ ./lolcow_latest.sif
+ ________________________________________
+/ You will always have good luck in your \
+\ personal affairs.                      /
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
 ```
 
 ## Build an image with Singularity recipe file
