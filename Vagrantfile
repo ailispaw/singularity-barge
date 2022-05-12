@@ -8,7 +8,7 @@ module VagrantPlugins
   end
 end
 
-SINGULARITY_VERSION = "v3.4.2"
+SINGULARITY_VERSION = "v3.9.9"
 
 Vagrant.configure(2) do |config|
   config.vm.define "singularity-barge"
@@ -42,7 +42,7 @@ Vagrant.configure(2) do |config|
       cd singularity
       git checkout #{SINGULARITY_VERSION}
 
-      docker run --rm -v $(pwd):$(pwd) ailispaw/singularity:builder
+      docker run --rm -v ${HOME}/go:${HOME}/go ailispaw/singularity:builder
 
       # Build a Barge Package for singularity
       source /etc/os-release
