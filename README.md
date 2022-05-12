@@ -132,7 +132,8 @@ exit
 ## Build an image with Singularity recipe file
 
 ```
-[bargee@barge ~]$ sudo singularity build sl.sif /vagrant/recipes/sl.Singularity
+[bargee@barge ~]$ sudo mkdir -p /mnt/data/tmp
+[bargee@barge ~]$ sudo singularity build --tmpdir=/mnt/data/tmp sl.sif /vagrant/recipes/sl.Singularity
 [bargee@barge ~]$ ./sl.sif
 [bargee@barge ~]$ singularity run sl.sif
 [bargee@barge ~]$ singularity exec sl.sif sl
