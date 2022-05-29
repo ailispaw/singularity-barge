@@ -23,7 +23,7 @@ Now you can use `singularity` on the Barge VM.
 
 ```
 $ vagrant ssh
-Welcome to Barge 2.13.0, Docker version 1.10.3, build 20f81dd
+Welcome to Barge 2.15.0, Docker version 1.10.3, build 662b14f
 [bargee@barge ~]$ singularity -h
 
 Linux container platform optimized for High Performance Computing (HPC) and
@@ -39,34 +39,41 @@ Description:
   other Linux system where Singularity is installed.
 
 Options:
-  -d, --debug     print debugging information (highest verbosity)
-  -h, --help      help for singularity
-      --nocolor   print without color output (default False)
-  -q, --quiet     suppress normal output
-  -s, --silent    only print errors
-  -v, --verbose   print additional information
-      --version   version for singularity
+  -c, --config string   specify a configuration file (for root or
+                        unprivileged installation only) (default
+                        "/etc/singularity/singularity.conf")
+  -d, --debug           print debugging information (highest verbosity)
+  -h, --help            help for singularity
+      --nocolor         print without color output (default False)
+  -q, --quiet           suppress normal output
+  -s, --silent          only print errors
+  -v, --verbose         print additional information
+      --version         version for singularity
 
 Available Commands:
   build       Build a Singularity image
   cache       Manage the local cache
   capability  Manage Linux capabilities for users and groups
+  completion  Generate the autocompletion script for the specified shell
+  config      Manage various singularity configuration (root user only)
+  delete      Deletes requested image from the library
   exec        Run a command within a container
   help        Help about any command
   inspect     Show metadata for an image
   instance    Manage containers running as services
   key         Manage OpenPGP keys
   oci         Manage OCI containers
-  plugin      Manage singularity plugins
+  overlay     Manage an EXT3 writable overlay image
+  plugin      Manage Singularity plugins
   pull        Pull an image from a URI
   push        Upload image to the provided URI
-  remote      Manage singularity remote endpoints
+  remote      Manage singularity remote endpoints, keyservers and OCI/Docker registry credentials
   run         Run the user-defined default command within a container
   run-help    Show the user-defined help for an image
   search      Search a Container Library for images
   shell       Run a shell within a container
-  sif         siftool is a program for Singularity Image Format (SIF) file manipulation
-  sign        Attach a cryptographic signature to an image
+  sif         Manipulate Singularity Image Format (SIF) images
+  sign        Attach digital signature(s) to an image
   test        Run the user-defined tests within a container
   verify      Verify cryptographic signatures attached to an image
   version     Show the version for Singularity
