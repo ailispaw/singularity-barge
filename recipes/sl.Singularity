@@ -1,5 +1,5 @@
 BootStrap: docker
-From: centos
+From: centos:7
 
 %post
     yum install -y epel-release
